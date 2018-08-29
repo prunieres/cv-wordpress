@@ -8,7 +8,7 @@
  *
  * @package CV
  */
-
+ <?php echo '<div class = "bar50">Ma barre</div>'?>
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>

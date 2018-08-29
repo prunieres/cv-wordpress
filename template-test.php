@@ -5,32 +5,20 @@ Template Name: Template CV
 get_header();
 ?>
 <ul>
-<?php
-    $args = array('category'=> 2,'orderby'=> 'date',);
-    $myposts = get_posts( $args );
-    foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
-    <li>
-        <h2><?php the_title(); ?></h2>
-        <p>
-            <?php the_content(); ?>
-            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </p>
-    </li>
-<?php endforeach;
-wp_reset_postdata();?>
-</ul>
-<ul>
-<?php
-    $args = array('category'=> 3,'orderby'=> 'date',);
-    $myposts = get_posts( $args );
-    foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
-    <li>
-        <h2><?php the_title(); ?></h2>
-        <p>
-            <?php the_content(); ?>
-            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </p>
-    </li>
-<?php endforeach;
-wp_reset_postdata();?>
-</ul>
+				<?php
+				$categories = [2,3];
+				foreach ($categories as $categorie_id) {
+					$category = get_category($categorie_id);
+					global $post;
+					$args = array('category' => $categorie_id);
+
+					$myposts = get_posts( $args );
+					echo "<h2>".$category->name." : "."</h2>";
+					foreach ( $myposts as $post ) :
+						setup_postdata( $post );
+						get_template_part('template-parts/test');
+				 	endforeach;
+				};
+				wp_reset_postdata();?>
+
+		</ul>
